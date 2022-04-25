@@ -3,3 +3,42 @@ configuracion:
   autor:
     nombre: Juan
     email: j-pablo-cp@hotmail.com
+    
+server:
+  port: 8002
+  
+eureka:
+  client:
+    service-url:
+      defaultZon: http://localhost:8761/eureka
+      
+resilience4j:
+  circuitbreaker:
+    configs:
+      defecto:
+        slidingWindowSize: 6
+        failureRateThreshold: 50
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 4
+        slowCallDurationThreshold: 2s
+    instances:
+      items:
+        baseConfig: defecto
+  timelimiter:
+    configs:
+      defecto:
+        timeoutDuration: 2s
+    instances:
+      items:
+        baseConfig: defecto
+        
+        
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: *
+
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds= 20000
+#ribbon.ConnectTimeout=3000
+#ribbon.ReadTimeout=10000
